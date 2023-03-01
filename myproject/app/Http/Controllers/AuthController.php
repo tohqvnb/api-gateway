@@ -14,6 +14,7 @@ class AuthController extends Controller
         $validator = Validator::make($input, [
             "email" => 'required|email',
             "password" => 'required',
+            "role" => 'required',
             "confirm_password" => 'required|same:password',
         ]);
 
@@ -33,6 +34,7 @@ class AuthController extends Controller
 
         $response['token'] = $query->createToken('users')->accessToken;
         $response['email'] =$query->email;
+        $response['role'] =$query->role;
 
         return response()->json($response, 200);
     }
