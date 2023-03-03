@@ -10,29 +10,57 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Laravel\Passport\HasApiTokens;
 
+
 class User extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use HasApiTokens, Authenticatable, Authorizable, HasFactory;
 
     protected $table = 'users';
-    protected $primaryKey = 'id';
-    protected $guarded = array('id');
-    public $timestamps = false;
+//    protected $primaryKey = 'id';
+//    protected $guarded = array('id');
+    public $timestamps = true;
 //    /**
 //     * The attributes that are mass assignable.
 //     *
 //     * @var array
 //     */
-//    protected $fillable = [
-//        'name', 'email',
-//    ];
+    protected $fillable = [
+        'name', 'email', 'password'
+    ];
 //
 //    /**
 //     * The attributes excluded from the model's JSON form.
 //     *
 //     * @var array
 //     */
-//    protected $hidden = [
-//        'password',
-//    ];
+    protected $hidden = [
+        'password',
+    ];
+
+
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function hasRole($role)
+    {
+        if (is_string($role)) {
+            return $this->roles->contains('name', $role);
+        }
+
+        return !! $role->intersect($this->roles)->count();
+    }
+
+
 }
