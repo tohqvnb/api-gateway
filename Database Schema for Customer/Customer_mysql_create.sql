@@ -13,7 +13,7 @@ CREATE TABLE `customers` (
 );
 
 CREATE TABLE `addresses` (
-	`id` INT NOT NULL AUTO_INCREMENT,
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`customer_id` INT NOT NULL,
 	`address_line` varchar(255) NOT NULL,
 	`address_line2` varchar(255),
@@ -67,7 +67,7 @@ CREATE TABLE `shipping_address` (
 );
 
 CREATE TABLE `products` (
-	`id` TIMESTAMP NOT NULL AUTO_INCREMENT,
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
 	`description` TEXT NOT NULL,
 	`price` DECIMAL NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE `products` (
 );
 
 CREATE TABLE `payment` (
-	`id` INT NOT NULL AUTO_INCREMENT,
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`order_id` INT NOT NULL AUTO_INCREMENT,
 	`payment_date` TIME NOT NULL,
 	`payment_method` varchar(255) NOT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE `reviews` (
 );
 
 CREATE TABLE `coupons` (
-	`id` bigint NOT NULL AUTO_INCREMENT,
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`customer_id` INT NOT NULL AUTO_INCREMENT,
 	`coupon_code` DECIMAL NOT NULL,
 	`discount_amount` FLOAT NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE `coupons` (
 );
 
 CREATE TABLE `categories` (
-	`id` INT NOT NULL AUTO_INCREMENT,
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`category_name` varchar(255) NOT NULL,
 	`description` TEXT NOT NULL,
 	`created_at` TIMESTAMP NOT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE `categories` (
 );
 
 CREATE TABLE `brands` (
-	`id` INT NOT NULL AUTO_INCREMENT,
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
 	`description` TEXT NOT NULL,
 	`status` tinyint NOT NULL DEFAULT '1',
@@ -134,7 +134,7 @@ CREATE TABLE `brands` (
 );
 
 CREATE TABLE `suppliers` (
-	`id` INT NOT NULL AUTO_INCREMENT,
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
 	`contact_name` varchar(255) NOT NULL,
 	`address` varchar(255) NOT NULL,
@@ -150,7 +150,7 @@ CREATE TABLE `suppliers` (
 	PRIMARY KEY (`id`)
 );
 
-ALTER TABLE `addressé` ADD CONSTRAINT `addressé_fk0` FOREIGN KEY (`customer_id`) REFERENCES `customers`(`id`);
+ALTER TABLE `addresses` ADD CONSTRAINT `addresses_fk0` FOREIGN KEY (`customer_id`) REFERENCES `customers`(`id`);
 
 ALTER TABLE `orders` ADD CONSTRAINT `orders_fk0` FOREIGN KEY (`customer_id`) REFERENCES `customers`(`id`);
 
@@ -160,7 +160,7 @@ ALTER TABLE `order_items` ADD CONSTRAINT `order_items_fk0` FOREIGN KEY (`order_i
 
 ALTER TABLE `order_items` ADD CONSTRAINT `order_items_fk1` FOREIGN KEY (`product_id`) REFERENCES `products`(`id`);
 
-ALTER TABLE `shipping_address` ADD CONSTRAINT `shipping_address_fk0` FOREIGN KEY (`address_id`) REFERENCES `addressé`(`id`);
+ALTER TABLE `shipping_address` ADD CONSTRAINT `shipping_address_fk0` FOREIGN KEY (`address_id`) REFERENCES `addresses`(`id`);
 
 ALTER TABLE `shipping_address` ADD CONSTRAINT `shipping_address_fk1` FOREIGN KEY (`customer_id`) REFERENCES `customers`(`id`);
 
