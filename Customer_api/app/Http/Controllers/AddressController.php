@@ -42,8 +42,6 @@ class AddressController extends Controller
     }
 
 
-
-
     public function update(Request $request, $id)
     {
         $address = Address::find($id);

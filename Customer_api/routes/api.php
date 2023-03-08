@@ -36,10 +36,4 @@ $router->group(['prefix' => '/api/v1'], function () use ($router) {
     Route::put('addresses/{id}', 'AddressController@update');
     Route::delete('addresses/{id}', 'AddressController@destroy');
 
-    // Customer_address routes
-    Route::get('customer_addresses', 'CustomerAddressController@index');
-    Route::get('customer_addresses/{id}', 'CustomerAddressController@show');
-    Route::post('customer_addresses', 'CustomerAddressController@create');
-    Route::delete('customer_addresses/{id}', 'CustomerAddressController@destroy');
-
 });

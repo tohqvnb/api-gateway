@@ -13,11 +13,19 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('email')->unique();
+            $table->date('date_of_birth');
             $table->string('phone_number');
-            $table->enum('gender', ['male','female']);
+            $table->string('job_title');
+            $table->string('home_phone')->nullable();
+            $table->string('company_name');
+            $table->string('fax');
+            $table->boolean('status', false);
+            $table->enum('gender', ['male', 'female']);
+            $table->datetime('registered_at');
+            $table->datetime('last_login');
             $table->timestamps();
         });
     }
