@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ProductPrice extends Model
+{
+    protected $table = 'product_price';
+
+    protected $fillable = [
+        'price', 'min_qty', 'max_qty', 'product_id'
+
+    ];
+
+    public function products()
+    {
+        return $this->belongsTo(Product::class);
+    }
+}

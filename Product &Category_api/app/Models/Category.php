@@ -19,7 +19,7 @@ class Category extends Model implements AuthenticatableContract, AuthorizableCon
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'name', 'slug', 'parent_id', 'description'
     ];
 
     /**
@@ -30,4 +30,10 @@ class Category extends Model implements AuthenticatableContract, AuthorizableCon
     protected $hidden = [
 
     ];
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
+
 }
