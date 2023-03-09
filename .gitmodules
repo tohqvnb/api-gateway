@@ -1,0 +1,3 @@
+[submodule "API-Gatway"]
+	path = API-Gatway
+	url = https://github.com/tohqvnb/api-gateway.git
